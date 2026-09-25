@@ -1,6 +1,7 @@
 // nav.jsx
 function Nav({ t, lang, setLang }) {
   const [scrolled, setScrolled] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   React.useEffect(() => {
     const on = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", on, { passive: true });
@@ -33,8 +34,8 @@ function Nav({ t, lang, setLang }) {
           <span style={{ fontWeight: 600, letterSpacing: "-0.02em", fontSize: 18 }}>Optacost</span>
         </a>
 
-        {/* Nav links */}
-        <nav style={{ display: "flex", gap: 28, alignItems: "center" }}>
+        {/* Nav links (desktop) */}
+        <nav className="nav-links" style={{ display: "flex", gap: 28, alignItems: "center" }}>
           {items.map((it) => (
             <a key={it.k} href={`#${it.k}`} style={{
               fontSize: 14, color: "var(--ink-soft)", fontWeight: 500,
@@ -46,8 +47,8 @@ function Nav({ t, lang, setLang }) {
           ))}
         </nav>
 
-        {/* Right side */}
-        <div style={{ display: "flex", gap: 12, alignItems: "center" }}>
+        {/* Right side (desktop) */}
+        <div className="nav-actions" style={{ display: "flex", gap: 12, alignItems: "center" }}>
           <LangToggle lang={lang} setLang={setLang} />
           <a href="https://app.optacost.com/" target="_blank" rel="noopener" className="btn btn-ghost btn-sm">
             {t.nav.login}
@@ -56,7 +57,39 @@ function Nav({ t, lang, setLang }) {
             {t.nav.contact} <Icon.arrow />
           </a>
         </div>
+
+        {/* Hamburger (mobile) */}
+        <button
+          className="nav-burger"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span style={{ transform: open ? "translateY(5px) rotate(45deg)" : "none" }} />
+          <span style={{ opacity: open ? 0 : 1 }} />
+          <span style={{ transform: open ? "translateY(-5px) rotate(-45deg)" : "none" }} />
+        </button>
       </div>
+
+      {/* Mobile dropdown panel */}
+      {open && (
+        <div className="nav-mobile container">
+          {items.map((it) => (
+            <a key={it.k} href={`#${it.k}`} onClick={() => setOpen(false)}>
+              {it.label}
+            </a>
+          ))}
+          <div className="nav-mobile-actions">
+            <LangToggle lang={lang} setLang={setLang} />
+            <a href="https://app.optacost.com/" target="_blank" rel="noopener" className="btn btn-ghost" onClick={() => setOpen(false)}>
+              {t.nav.login}
+            </a>
+            <a href="https://api.whatsapp.com/send?phone=5492915067059" target="_blank" rel="noopener" className="btn btn-primary" onClick={() => setOpen(false)}>
+              {t.nav.contact} <Icon.arrow />
+            </a>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

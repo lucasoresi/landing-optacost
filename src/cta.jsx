@@ -74,7 +74,7 @@ function Footer({ t }) {
     }}>
       <div className="container">
         {/* Top: brand + cols */}
-        <div style={{
+        <div className="footer-cols" style={{
           display: "grid",
           gridTemplateColumns: "1.4fr repeat(4, 1fr)",
           gap: 40, marginBottom: 56,

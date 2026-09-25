@@ -49,7 +49,7 @@ function Hero({ t, lang = "es", dark = false }) {
 
         {/* Headline */}
         <h1 className="rise rise-2" style={{
-          fontSize: "clamp(48px, 6.4vw, 96px)",
+          fontSize: "clamp(32px, 6.4vw, 96px)",
           lineHeight: 1.02,
           letterSpacing: "-0.035em",
           fontWeight: 600,
@@ -139,7 +139,7 @@ function Hero({ t, lang = "es", dark = false }) {
 
 function FloatingKPI({ label, value, sub, mono, style }) {
   return (
-    <div style={{
+    <div className="floating-kpi" style={{
       position: "absolute",
       padding: "14px 18px",
       background: "var(--bg)",

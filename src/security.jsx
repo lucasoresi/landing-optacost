@@ -3,7 +3,7 @@ function Security({ t }) {
   return (
     <section id="security" className="section section-divider" style={{ background: "var(--bg-tint)" }}>
       <div className="container">
-        <header style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "end", marginBottom: 56 }}>
+        <header className="sec-header" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "end", marginBottom: 56 }}>
           <div>
             <span className="eyebrow">{t.security.eyebrow}</span>
             <h2 className="section-title" style={{ marginTop: 18 }}>

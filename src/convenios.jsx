@@ -5,7 +5,7 @@ function Convenios({ t }) {
       background: "var(--bg-tint)",
     }}>
       <div className="container">
-        <header style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "end", marginBottom: 56 }}>
+        <header className="sec-header" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "end", marginBottom: 56 }}>
           <div>
             <span className="eyebrow">{t.convenios.eyebrow}</span>
             <h2 className="section-title" style={{ marginTop: 18 }}>
@@ -15,7 +15,7 @@ function Convenios({ t }) {
           <p className="section-lede" style={{ marginTop: 0 }}>{t.convenios.lede}</p>
         </header>
 
-        <div style={{
+        <div className="matrix-card" style={{
           background: "var(--bg)", border: "1px solid var(--border)",
           borderRadius: 18, padding: 28,
           boxShadow: "0 1px 0 oklch(1 0 0 / 0.7) inset, 0 24px 60px -28px oklch(0.18 0.018 250 / 0.16)",
@@ -72,7 +72,7 @@ function ConvenioMatrix({ t }) {
       </div>
 
       {/* Matrix */}
-      <div style={{
+      <div className="matrix-scroll" style={{
         display: "grid",
         gridTemplateColumns: "minmax(140px, 1.3fr) repeat(12, 1fr) 70px",
         gap: 4,

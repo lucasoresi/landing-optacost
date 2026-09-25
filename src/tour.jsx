@@ -15,7 +15,7 @@ function Tour({ t }) {
   return (
     <section id="tour" className="section section-divider">
       <div className="container">
-        <header style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "end", marginBottom: 56 }}>
+        <header className="sec-header" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 60, alignItems: "end", marginBottom: 56 }}>
           <div>
             <span className="eyebrow">{t.tour.eyebrow}</span>
             <h2 className="section-title" style={{ marginTop: 18 }}>
@@ -25,7 +25,7 @@ function Tour({ t }) {
           <p className="section-lede" style={{ marginTop: 0 }}>{t.tour.lede}</p>
         </header>
 
-        <div style={{
+        <div className="col-split" style={{
           display: "grid",
           gridTemplateColumns: "360px 1fr",
           gap: 32,

@@ -30,7 +30,7 @@ function BentoGrid({ items, lang }) {
   // -> 6 items, asymmetric
 
   return (
-    <div style={{
+    <div className="bento" style={{
       display: "grid",
       gridTemplateColumns: "repeat(6, 1fr)",
       gridAutoRows: "minmax(220px, auto)",

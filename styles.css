@@ -78,8 +78,8 @@ html, body {
   font-feature-settings: "kern", "liga";
 }
 
-body {
-  overflow-x: hidden;
+html, body {
+  overflow-x: clip;
 }
 
 a { color: inherit; text-decoration: none; }
@@ -90,19 +90,17 @@ button { font-family: inherit; cursor: pointer; }
 
 /* ─── Layout primitives ─── */
 .container {
-  width: 70%;
-  max-width: 1480px;
+  width: min(92%, 1180px);
   margin: 0 auto;
 }
 
 .container-narrow {
-  width: 70%;
-  max-width: 1000px;
+  width: min(92%, 1000px);
   margin: 0 auto;
 }
 
 .section {
-  padding: clamp(72px, 9vw, 140px) 0;
+  padding: clamp(56px, 5.5vw, 96px) 0;
   position: relative;
 }
 
@@ -210,6 +208,7 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px solid var(--border);
   border-radius: var(--r-md);
   overflow: hidden;
+  max-width: 100%;
   font-family: var(--f-sans);
   box-shadow:
     0 1px 0 oklch(1 0 0 / 0.7) inset,
@@ -299,10 +298,98 @@ button { font-family: inherit; cursor: pointer; }
 .grid-6 { grid-template-columns: repeat(6, 1fr); }
 .grid-12 { grid-template-columns: repeat(12, 1fr); }
 
+/* ─── Nav responsive ─── */
+.nav-burger { display: none; }
+.nav-mobile { display: none; }
+
 @media (max-width: 900px) {
   .grid-3, .grid-4, .grid-6 { grid-template-columns: repeat(2, 1fr); }
   .grid-12 { grid-template-columns: 1fr; }
   .grid-2 { grid-template-columns: 1fr; }
+}
+
+/* ─── Tablet / below: collapse nav into a hamburger ─── */
+@media (max-width: 820px) {
+  .nav-links, .nav-actions { display: none !important; }
+  .nav-burger {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm, 10px);
+    background: transparent;
+  }
+  .nav-burger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--ink);
+    border-radius: 2px;
+    transition: transform .2s ease, opacity .2s ease;
+  }
+  .nav-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 8px;
+    padding-bottom: 18px;
+    animation: rise .25s ease-out both;
+  }
+  .nav-mobile > a {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    padding: 12px 4px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .nav-mobile-actions .btn {
+    min-height: 44px;
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}
+
+/* ─── Tablet / below: stack the two-column section layouts ─── */
+@media (max-width: 820px) {
+  .sec-header {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+    margin-bottom: 36px !important;
+  }
+  .col-split { grid-template-columns: minmax(0, 1fr) !important; }
+  .col-split > * { min-width: 0; }
+  .footer-cols { grid-template-columns: 1fr 1fr !important; gap: 28px !important; }
+  .bento { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .bento > * { grid-column: auto !important; min-width: 0; }
+}
+
+/* ─── Phone: single column, comfortable tap targets ─── */
+@media (max-width: 600px) {
+  .grid-3, .grid-4, .grid-6, .grid-2 { grid-template-columns: 1fr; }
+  .btn-sm { padding: 10px 16px; min-height: 44px; }
+  .btn { min-height: 44px; }
+  .footer-cols { grid-template-columns: 1fr !important; }
+  /* Decorative floating KPI cards bleed off-canvas on phones — hide them */
+  .floating-kpi { display: none !important; }
+  /* Bento grid stacks into one column on phones */
+  .bento { grid-template-columns: 1fr !important; }
+  /* Wide data matrix scrolls horizontally instead of breaking the layout */
+  .matrix-card { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .matrix-scroll { min-width: 600px; }
 }
 
 /* ─── Tiny utilities ─── */
